@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: SpringBootDemoApp
+  datasource:
+    url: jdbc:postgresql://localhost:5432/app_db
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27020/app_db?authSource=admin
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: admin123
+      timeout: 5000
+  main:
+    allow-bean-definition-overriding: true
+app:
+  cache:
+    ttl-seconds: 1800
+    topn-key: "products:top"
+  sync:
+    batch-size: 100
+    last-sync-key: "sync:postgres:last"
+    every-ms: 60000

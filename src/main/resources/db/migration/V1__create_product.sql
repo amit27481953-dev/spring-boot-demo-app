@@ -1,0 +1,8 @@
+CREATE TABLE product (
+  id BIGSERIAL PRIMARY KEY,
+  sku VARCHAR(100) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  price NUMERIC(12,2),
+  description TEXT,
+  updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
+);
