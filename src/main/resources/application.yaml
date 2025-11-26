@@ -21,6 +21,17 @@ spring:
       timeout: 5000
   main:
     allow-bean-definition-overriding: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 3
+        max-concurrency: 10
+        prefetch: 1
 app:
   cache:
     ttl-seconds: 1800
@@ -29,3 +40,9 @@ app:
     batch-size: 100
     last-sync-key: "sync:postgres:last"
     every-ms: 60000
+  mq:
+    exchange: product.cache.exchange
+    queue: product.cache.queue
+    routing_key: product.cache.key
+    dlx: product.cache.dlx
+    dlq: product.cache.dlq

@@ -25,12 +25,12 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<ProductDto> create(@Validated  @RequestBody ProductDto dto){
-        ProductDto res = productService.createOrUpdate(dto);
+        ProductDto res = productService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
     @PutMapping({"/{sku}"})
     public ResponseEntity<ProductDto> update(@PathVariable @NotNull String sku, @Validated @RequestBody ProductDto dto) {
-        return ResponseEntity.ok(productService.createOrUpdate(dto));
+        return ResponseEntity.ok(productService.update(dto));
     }
 
     @DeleteMapping("/{sku}")

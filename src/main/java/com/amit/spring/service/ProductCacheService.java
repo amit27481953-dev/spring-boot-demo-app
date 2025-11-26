@@ -1,7 +1,8 @@
 package com.amit.spring.service;
 
-import com.amit.spring.config.CacheProps;
+import com.amit.spring.config.props.CacheProps;
 import com.amit.spring.doc.ProductDoc;
+import com.amit.spring.exception.RedisPutException;
 import com.amit.spring.repository.ProductMongoRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,7 @@ public class ProductCacheService {
             ProductDoc productDoc = mapper.readValue(json, ProductDoc.class);
             return Optional.of(productDoc);
         } catch (Exception e) {
+            log.error("No entries found for sku {} in cache", sku);
             return Optional.empty();
         }
     }
@@ -71,6 +73,7 @@ public class ProductCacheService {
             redis.opsForZSet().incrementScore(cacheProps.getTopnkey(), sku, 1);
         } catch (Exception e) {
             log.error("Error While caching the sku {} in redis", doc.getSku());
+            throw new RedisPutException("Sku not able to save in cache",e);
         }
     }
 

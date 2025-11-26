@@ -1,4 +1,4 @@
-package com.amit.spring.config;
+package com.amit.spring.config.props;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
